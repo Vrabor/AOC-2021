@@ -13,6 +13,8 @@ My Repository for Advent of Code 2021. The plan was to do all of the exercises i
 * Day9-11: C++
 * Day12: Typescript
 * Day13: D
+* Day14
+* Day15: Python
 
 # Notes:
 * C: I wanted to get back into C. After working mostly in C# and Java, i really liked the idea of having a lean and small language. But what i got was a lean and small language (monkeys paw i guess): Working with the Files is cumbersome, there is a lot of bookkeeping to do (after revisiting the Code i noticed i was leaking the File) and you're just working at a low abstraction level in general (unless you either roll your own stdlib or work in a big project like the linux kernel). Those are all things i wanted from C, but after using it for only one and a half days i was already done with it. I kept just wanting to test out my ideas without worrying about all the details that don't matter. It really kills your productivity to have to worry about a lot of stuff besides the problem itself. (Also don't be to harsh on my code, i haven't touched C in like 4 years)
