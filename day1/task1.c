@@ -20,6 +20,8 @@ int main(){
         previous = current;
     }
 
+    fclose(f);
+
     printf("Number of increases: %d\n", increases);
     return 0;
 }
