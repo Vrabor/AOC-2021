@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
+#include <functional>
 
 bool is_lowpoint(std::vector<std::string>& arr, int x, int y){
   return arr[x][y] < arr[x][y - 1] && arr[x][y] < arr[x][y + 1]
@@ -35,6 +37,44 @@ int Task1(std::vector<std::string>& input) {
   return low_sum;
 }
 
+int walk_basin(std::vector<std::string>& input, int x, int y) {
+  if (input[x][y] == '9') {
+	// 9s do not belong to the basin
+	return 0;
+  }
+  // own point is part of basin
+  int size = 1;
+
+  // don't count current point anymore
+  input[x][y] = '9';
+
+  size += walk_basin(input, x - 1, y);
+  size += walk_basin(input, x, y - 1); 
+  size += walk_basin(input, x + 1, y);
+  size += walk_basin(input, x, y + 1);
+
+  return size;
+}
+
+std::vector<int> get_basins(std::vector<std::string>& input) {
+  std::vector<int> basins {};
+  for (auto i = 1; i < input.size() - 1; i++){
+    for (auto j = 1; j < input[i].size() - 1; j ++){
+      if (is_lowpoint(input, i, j)){
+		basins.push_back(walk_basin(input, i, j));
+      }
+    }
+  }
+  return basins;
+}
+
+int Task2(std::vector<std::string>& input) {
+    auto basins = get_basins(input);
+    std::sort(basins.begin(), basins.end(), std::greater<int>());
+
+    return basins[0] * basins[1] * basins[2];
+}
+
 int main() {
   std::ifstream istrm("input.txt", std::ios::in);
   std::string buf = "";
@@ -47,6 +87,9 @@ int main() {
 
   int solution1 = Task1(input);
   std::cout << "Task1: " << solution1 << "\n";
+
+  int solution2 = Task2(input);
+  std::cout << "Task2: " << solution2 << "\n";
 
   return 0;
 }
