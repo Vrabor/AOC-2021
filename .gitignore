@@ -4,3 +4,4 @@ obj
 target
 a.out
 target
+*.o
